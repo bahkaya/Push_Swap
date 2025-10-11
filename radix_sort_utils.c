@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   radix_sort_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 21:22:08 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/10/11 19:50:24 by bahkaya          ###   ########.fr       */
+/*   Created: 2025/10/11 19:49:46 by bahkaya           #+#    #+#             */
+/*   Updated: 2025/10/11 19:57:15 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
-#include <stdio.h>
-typedef struct s_stack
-{
-	int	x;
-	int	index;
-	struct s_stack *next;
-} t_stack;
+#include "push_swap.h"
 
-char **ft_av_converter(char const **av);
-t_stack	*ft_stack_malloc(int number);
-t_stack	*ft_stack(char const **av, int ac);
-int	ft_stack_size(t_stack *a);
-void sa(t_stack **a);
-void ra(t_stack **a);
+int ft_put_index(t_stack **a)
+{
+	t_stack	*msb_location;
+	int		i;
+
+	msb_location = a;
+	i = 0;
+	while (msb_location != NULL)
+	{
+		while (msb_location->x  )
+	}
+}
