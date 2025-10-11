@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:42:09 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/10/10 22:01:43 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/10/11 15:50:44 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_stack	*ft_stack_malloc(int number)
 	return (a);
 }
 
-void	ft_stack(char const **av, int ac)
+t_stack	*ft_stack(char const **av, int ac)
 {
 	t_stack		*temp;
 	t_stack		*head;
@@ -29,7 +29,7 @@ void	ft_stack(char const **av, int ac)
 	int			i;
 	if (ac == 31)
 		printf("%s\n", "OSMAN ABUBAKAR");
-	head = NULL;
+	temp = NULL;
 	i = 0;
 	how_many_digit = 0;
 	arr_digit = ft_av_converter(av);
@@ -39,14 +39,10 @@ void	ft_stack(char const **av, int ac)
 		how_many_digit++;
 	while (i < how_many_digit)
 	{
-		temp = ft_stack_malloc(ft_atoi(arr_digit[i]));
-		temp->next = head;
-		head = temp;
+		head = ft_stack_malloc(ft_atoi(arr_digit[i]));
+		head->next = temp;
+		temp = head;
 		i++;
 	}
-	while (temp != NULL)
-	{
-		printf("%d\n", temp->x);
-		temp = temp->next;
-	}
+	return (head);
 }
