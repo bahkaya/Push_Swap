@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:49:46 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/10/11 19:57:15 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/08 17:16:52 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int ft_put_index(t_stack **a)
 	i = 0;
 	while (msb_location != NULL)
 	{
-		while (msb_location->x  )
+		while (1 << msb_location->x == )
+		msb_location++;
 	}
 }
+// 
