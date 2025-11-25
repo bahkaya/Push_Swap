@@ -6,58 +6,59 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:42:09 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/08 19:37:07 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/25 21:00:09 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-t_stack	*ft_stack_malloc_a(int number)
+t_stack	*ft_stack_malloc_a(int number, char **arr_digit)
 {
 	t_stack	*a;
+	int		i;
+	int		index;
+	int		how_many;
+	
+	how_many = 0;
+	i = 0;
+	index = 0;
 	a = malloc(sizeof(t_stack));
 	a->x = number;
+	while (arr_digit[i] != NULL)
+	{
+		if (number > ft_atoi(arr_digit[i]))
+			index++;
+		if (number == ft_atoi(arr_digit[i]))
+			how_many++;
+		i++;
+	}
+	if (how_many != 1 || (how_many == 1 && i == 1)) // Burada birde stacki freelemek lzm sonra bakarsın
+	{
+		write(2, "Error\n", ft_strlen("Error\n")); // aşağıda bunu yapmışız 1 elemanlı stack ise o yüzden sorun yok ama eşit olabilme olasılığı var
+		free_stack(a);
+		exit(-1);
+	}
+	a->index = index;
 	a->next = NULL;
 	return (a);
 }
-t_stack	*ft_stack_malloc_b(char const **av)
-{
-	t_stack	*temp;
-	t_stack	*head;
-	char	**arr_digit;
-	int		flag;
-	int		how_many_digit;
-	int		i;
 
-	how_many_digit = 0;
-	i = 0;
-	temp = NULL;
-	arr_digit = ft_av_converter(av, &flag);
-	if (flag == 5)
+char **ft_error_check(char **arr_digit, int *flag)
+{
+	if (*flag == 5)
 	{
 		ft_free(arr_digit);
 		exit (-1);
 	}
-	
 	if (!arr_digit)
 	{
-		write(1, "ERROR\n", ft_strlen("ERROR\n"));
+		write(2, "Error\n", ft_strlen("Error\n"));
 		ft_free(arr_digit);
 		exit(-1);
 	}
-	while (arr_digit[how_many_digit] != NULL)
-		how_many_digit++;
-	while (i < how_many_digit)
-	{
-		head = malloc(sizeof(t_stack));
-		head->next = temp;
-		temp = head;
-		i++;
-	}
-	ft_free(arr_digit);
-	return (head);
+	return (arr_digit);
 }
 //TODO Stack boş oluşması lazım sonradan içerisine sayı atılacak. Return sıkıntısı.
-t_stack	*ft_stack_a(char const **av, int ac)
+t_stack	*ft_stack_a(char const **av)
 {
 	t_stack		*temp;
 	t_stack		*head;
@@ -67,43 +68,40 @@ t_stack	*ft_stack_a(char const **av, int ac)
 	int flag;
 
 	flag = 0;
-	if (ac == 31)
-		printf("%s\n", "OSMAN ABUBAKAR");
 	temp = NULL;
 	i = 0;
 	how_many_digit = 0;
 	arr_digit = ft_av_converter(av, &flag);
-	if (flag == 5)
+	arr_digit = ft_error_check(arr_digit, &flag);
+	while (arr_digit[how_many_digit] != NULL)
+		how_many_digit++;
+	if (how_many_digit == 1)
 	{
+		write(2, "Error\n", 6);
 		ft_free(arr_digit);
 		exit (-1);
 	}
-	
-	if (!arr_digit)
-	{
-		write(1, "ERROR\n", ft_strlen("ERROR\n"));
-		ft_free(arr_digit);
-		exit(-1);
-	}
-	while (arr_digit[how_many_digit] != NULL)
-		how_many_digit++;
 	while (i < how_many_digit)
 	{
-		head = ft_stack_malloc_a(ft_atoi(arr_digit[i]));
+		if (ft_atoi(arr_digit[how_many_digit - 1]) > __INT_MAX__ || ft_atoi(arr_digit[how_many_digit -1]) < _SC_INT_MIN)
+		{
+			write(2, "Error\n", 6);
+			ft_free(arr_digit);
+			free_stack(head);
+			exit(-1);
+		}
+		head = ft_stack_malloc_a(ft_atoi(arr_digit[how_many_digit - 1]), arr_digit);
+		if(!head)
+		{
+			write(2, "Error\n", 6);
+			ft_free(arr_digit);
+			free_stack(head);
+			exit(-1);
+		}
 		head->next = temp;
 		temp = head;
-		i++;
+		how_many_digit--;
 	}
 	ft_free(arr_digit);
 	return (head);
 }
-
-/*
-head
-----
-201 55
-null
-
-
-if ()
-*/

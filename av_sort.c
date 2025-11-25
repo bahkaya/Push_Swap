@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:39:39 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/08 18:09:40 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/25 19:54:01 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ char	**ft_av_converter(char const **av, int *flag)
 	int		i;
 	int		k;
 	char	**arr_is_digit;
+
 	k = 0;
 	i = 0;
 	arr_is_digit = ft_split(av[1], ' ');
-
 	while (arr_is_digit[k] != NULL)
 	{
 		while (arr_is_digit[k][i] != '\0' )

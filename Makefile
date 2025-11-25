@@ -44,7 +44,9 @@ SRCS := \
 	push_swap.c \
 	av_sort.c \
 	ft_stack_initializer.c \
-	ft_push_swap_utils.c
+	ft_push_swap_utils.c	\
+	radix_sort_utils.c		\
+	n_argv_sort.c
 
 OBJS := $(SRCS:.c=.o)
 
@@ -66,5 +68,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+test:
+	@$(CC) $(CFLAGS) $(OBJS) test.c
 
 .PHONY: all clean fclean re
