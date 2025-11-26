@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:53:39 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/25 20:45:01 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/26 22:08:58 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int main(int ac, char const **av)
 		
 	t_stack	*a;
 	t_stack *b;
-
+	
 	if (ac == 2)
 	{
 		b = NULL;
@@ -77,36 +77,15 @@ int main(int ac, char const **av)
 		how_many_bits = ft_msb_bit(stack_size);
 		ft_radix_sort(&a, how_many_bits, stack_size, &b);
 	}
-	print_stack2(a);
+	
 	free_stack(a);
 	return 0;
 }
-// TODO: STACK B YAPILDI 2- ra ba pb yapılacak
-// TODO: ft_stack içindeki freeler veya parselar değişmesi gerekiyor çünkü stack b için 
-// malloc lzm
-//TODO: Gerekli fonksiyonlar 
-// Parserda eksiklikler var denenen caseleri öğrenip handle lamak lazım.
-//ÖRn
-/*
-./push_swap 50 40 asda 
- % ./push_swap 50 40 32131
- artı eksi olmaması lazım. hata dönmeli
-  % ./push_swap "50" 40 32131
-  max int le ilgili caseler var.
-*/
-
 //TODO
-// ra pa fln lar tamamlanıcak.
-//TODO
-/*
- A stackinde sayıların mevcut. B stacki oluşturulucak.
- Sayıların indexi buluncak lsb ye göre
-*/
-
-//TODO
-//indexe göre a b stacklerini kullanarak sıralayacaksın.
-// stack'e 5 ten az sayı gelirse özel bir case yazılacak.
-//leakler bakılacak caseler denenicek.
-//En son sıralamalar yapıldıktan sonra stackler freelenmesi lazım.
-
+//1-ft_atoinde hata var dikkat et onu kontrol et int max int min almıyor
+//2-ft_free birden fazla argümanda hata var
+//3-12 tane sayı olursa bunları düzelt 
+//4- Sonradan radixine bak
+//5- norm düzelt
+//6- ./a.out ise return(0) yaz
 

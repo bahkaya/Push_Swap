@@ -35,12 +35,12 @@
 # 	@./$(NAME) "50 20 10 40"
 
 
-NAME := push_swap
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror
-LIBFT=./libft/libft.a
+NAME = push_swap
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+LIBFT =./libft/libft.a
 
-SRCS := \
+SRCS = \
 	push_swap.c \
 	av_sort.c \
 	ft_stack_initializer.c \
@@ -48,12 +48,12 @@ SRCS := \
 	radix_sort_utils.c		\
 	n_argv_sort.c
 
-OBJS := $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME) -g
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 	make -C ./libft

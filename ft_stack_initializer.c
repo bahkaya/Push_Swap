@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 21:42:09 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/25 21:00:09 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/26 22:05:19 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_stack	*ft_stack_malloc_a(int number, char **arr_digit)
 	t_stack	*a;
 	int		i;
 	int		index;
-	int		how_many;
+	int		how_many_equal;
 	
-	how_many = 0;
+	how_many_equal = 0;
 	i = 0;
 	index = 0;
 	a = malloc(sizeof(t_stack));
@@ -28,14 +28,14 @@ t_stack	*ft_stack_malloc_a(int number, char **arr_digit)
 		if (number > ft_atoi(arr_digit[i]))
 			index++;
 		if (number == ft_atoi(arr_digit[i]))
-			how_many++;
+			how_many_equal++;
 		i++;
 	}
-	if (how_many != 1 || (how_many == 1 && i == 1)) // Burada birde stacki freelemek lzm sonra bakarsın
+	if (how_many_equal != 1) // Burada birde stacki freelemek lzm sonra bakarsın
 	{
-		write(2, "Error\n", ft_strlen("Error\n")); // aşağıda bunu yapmışız 1 elemanlı stack ise o yüzden sorun yok ama eşit olabilme olasılığı var
-		free_stack(a);
-		exit(-1);
+		// aşağıda bunu yapmışız 1 elemanlı stack ise o yüzden sorun yok ama eşit olabilme olasılığı var
+		free(a);
+		return(0);
 	}
 	a->index = index;
 	a->next = NULL;
@@ -46,12 +46,13 @@ char **ft_error_check(char **arr_digit, int *flag)
 {
 	if (*flag == 5)
 	{
+		write(2, "Error\n", 6);
 		ft_free(arr_digit);
 		exit (-1);
 	}
 	if (!arr_digit)
 	{
-		write(2, "Error\n", ft_strlen("Error\n"));
+		write(2, "Error\n", 6);
 		ft_free(arr_digit);
 		exit(-1);
 	}
@@ -69,21 +70,23 @@ t_stack	*ft_stack_a(char const **av)
 
 	flag = 0;
 	temp = NULL;
+	head = NULL;
 	i = 0;
 	how_many_digit = 0;
 	arr_digit = ft_av_converter(av, &flag);
 	arr_digit = ft_error_check(arr_digit, &flag);
 	while (arr_digit[how_many_digit] != NULL)
 		how_many_digit++;
-	if (how_many_digit == 1)
-	{
-		write(2, "Error\n", 6);
-		ft_free(arr_digit);
-		exit (-1);
-	}
+	// if (how_many_digit == 1)
+	// {
+	// 	write(2, "Error\n", 6);
+	// 	ft_free(arr_digit);
+	// 	exit (-1);
+	// }
+	printf("%d\n", how_many_digit);
 	while (i < how_many_digit)
 	{
-		if (ft_atoi(arr_digit[how_many_digit - 1]) > __INT_MAX__ || ft_atoi(arr_digit[how_many_digit -1]) < _SC_INT_MIN)
+		if (ft_atoi(arr_digit[how_many_digit - 1]) > INT_MAX || ft_atoi(arr_digit[how_many_digit -1]) < INT_MIN)
 		{
 			write(2, "Error\n", 6);
 			ft_free(arr_digit);
@@ -95,7 +98,7 @@ t_stack	*ft_stack_a(char const **av)
 		{
 			write(2, "Error\n", 6);
 			ft_free(arr_digit);
-			free_stack(head);
+			free_stack(temp);
 			exit(-1);
 		}
 		head->next = temp;

@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:46:19 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/23 21:42:11 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/26 20:40:27 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_stack_size(t_stack *a)
 	int	i;
 
 	i = 0;
-	while (a->next != NULL)
+	while (a != NULL)
 	{
 		i++;
 		a = a->next;

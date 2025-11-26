@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:29:25 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/26 18:53:13 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/26 21:56:09 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 void	ft_check_for_same_number(char const **av, int number, int ac)
 {
 	int	k;
-	int len;
+	int how_many_equal;
 
-	len = 0;
+	how_many_equal = 0;
 	k = 0;
 	while(k < ac) // Burası sıkıntılı doğru değil parse düzgün yap aq!
 	{
 		if(number == ft_atoi(av[k]))
-			len++;
+			how_many_equal++;
 		k++;
 	}
-	if (len != 1)
+	if (how_many_equal != 1)
 	{
 		write(2, "Error\n", 6);
 		exit(-1);
@@ -53,7 +53,7 @@ void	ft_error_check_n_argv(char const **av)
 				i++;
 			else if (!ft_isdigit(av[k][i]))
 			{
-				write(2, "Error\n", ft_strlen("Error\n"));
+				write(2, "Error\n", 6);
 				exit(-1);
 			}
 		}
@@ -74,6 +74,11 @@ char **ft_n_av_converter(char const **av, int ac)
 	while(k < ac) // Burası sıkıntılı doğru değil parse düzgün yap aq!
 	{
 		len = ft_atoi(av[k]);
+		if (ft_atoi(av[k]) > 2147483647 || ft_atoi(av[k]) < -2147483648)
+		{
+			write(2, "Error\n", 6);
+			exit(-1);
+		}
 		ft_check_for_same_number(av, len, ac);
 		k++;
 	}
@@ -84,11 +89,13 @@ char **ft_n_av_converter(char const **av, int ac)
 		ft_free(arr_digit); // kontrol et buna gerek yok olsa gerek
 		exit(-1);
 	}
-	if (len != 1)
-	{
-		write(2, "Error\n", 6);
-		exit(-1);
-	}
+	len = 0;
+	// if (len != 1)
+	// {
+	// 	write(2, "Erro5\n", 6);
+	// 	exit(-1);
+	// }
+	k = 1;
 	while (k < ac)
 	{
 		len = ft_strlen(av[ac - 1]);
@@ -108,13 +115,15 @@ t_stack *ft_n_stack_a(char const **av, int ac)
 	int		i;
 
 	temp = NULL;
+	head = NULL;
 	i = 0;
-		
 	ft_error_check_n_argv(av);
 	arr_digit = ft_n_av_converter(av, ac);
 	i = 0;
+
 	while (i < ac - 1)
 	{
+
 		head = ft_stack_malloc_a(ft_atoi(arr_digit[i]), arr_digit);
 		if(!head)
 		{
@@ -127,6 +136,6 @@ t_stack *ft_n_stack_a(char const **av, int ac)
 		temp = head;
 		i++;
 	}
-	ft_free(arr_digit);
+	// ft_free(arr_digit); burada bir hata var ama ne?
 	return (head);
 }

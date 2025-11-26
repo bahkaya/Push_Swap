@@ -6,12 +6,15 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:22:08 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/25 20:59:52 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/26 22:00:41 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+#define PUSH_SWAP_H
 #include "./libft/libft.h"
 #include <stdio.h>
+#include <limits.h>
 typedef struct s_stack
 {
 	int	x;
@@ -40,3 +43,4 @@ void	pb(t_stack **a, t_stack **b);
 
 void	free_stack(t_stack *a);
 void	ft_free(char **str_is_digit);
+#endif
