@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:39:39 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/25 19:54:01 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/26 13:02:27 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ char	**ft_av_converter(char const **av, int *flag)
 	arr_is_digit = ft_split(av[1], ' ');
 	while (arr_is_digit[k] != NULL)
 	{
+		if(arr_is_digit[k][i] == '+' || arr_is_digit[k][i] == '-')
+			i++;
+		if(arr_is_digit[k][i] == '\0')
+		{
+			write(2, "Error\n", 6);
+			ft_free(arr_is_digit);
+			exit(-1);
+		}
 		while (arr_is_digit[k][i] != '\0' )
 		{
 			if (ft_isdigit(arr_is_digit[k][i]))
