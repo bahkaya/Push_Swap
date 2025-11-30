@@ -6,21 +6,22 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:29:25 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/30 18:01:43 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/30 18:26:44 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 void	ft_check_for_same_number(char const **av, int number, int ac)
 {
 	int	k;
-	int how_many_equal;
+	int	how_many_equal;
 
 	how_many_equal = 0;
 	k = 0;
-	while(k < ac) // Burası sıkıntılı doğru değil parse düzgün yap aq!
+	while (k < ac)
 	{
-		if(number == ft_atoi(av[k]))
+		if (number == ft_atoi(av[k]))
 			how_many_equal++;
 		k++;
 	}
@@ -50,7 +51,7 @@ void	ft_error_check_n_argv(char const **av)
 		}
 		while (av[k][i] != '\0')
 		{
-			if(ft_isdigit(av[k][i]))
+			if (ft_isdigit(av[k][i]))
 				i++;
 			else if (!ft_isdigit(av[k][i]))
 			{
@@ -62,7 +63,7 @@ void	ft_error_check_n_argv(char const **av)
 	}
 }
 
-char **ft_n_av_converter(char const **av, int ac)
+char	**ft_n_av_converter(char const **av, int ac)
 {
 	char	**arr_digit;
 	int		i;
@@ -85,10 +86,10 @@ char **ft_n_av_converter(char const **av, int ac)
 		ac--;
 	}
 	arr_digit[i] = NULL;
-	return(arr_digit);
+	return (arr_digit);
 }
 
-t_stack *ft_n_stack_a(char const **av, int ac)
+t_stack	*ft_n_stack_a(char const **av, int ac)
 {
 	t_stack	*head;
 	t_stack	*temp;
@@ -105,13 +106,8 @@ t_stack *ft_n_stack_a(char const **av, int ac)
 	while (i < ac - 1)
 	{
 		head = ft_stack_malloc_a(ft_atoi(arr_digit[i]), arr_digit);
-		if(!head)
-		{
-			write(2, "Error\n", 6);
-			ft_free(arr_digit);
-			free_stack(head);
-			exit(-1);
-		}
+		if (!head)
+			ft_error_return_stack(arr_digit, head);
 		head->next = temp;
 		temp = head;
 		i++;
