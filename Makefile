@@ -46,7 +46,8 @@ SRCS = \
 	ft_stack_initializer.c \
 	ft_push_swap_utils.c	\
 	radix_sort_utils.c		\
-	n_argv_sort.c
+	n_argv_sort.c			\
+	sorting.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -62,6 +63,7 @@ $(LIBFT):
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
+	rm -f $(LIBFT)
 	rm -f $(OBJS)
 
 fclean: clean

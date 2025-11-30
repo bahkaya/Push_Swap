@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 15:46:19 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/26 20:40:27 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/30 15:07:48 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void pb(t_stack **a, t_stack **b)
 {
 	t_stack *first_a;
 
-	if (!b || !*b)
+	if (!a || !*a)
 		return;
 	first_a = *a;
 	(*a) = (*a) ->next;

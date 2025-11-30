@@ -6,7 +6,7 @@
 /*   By: bahkaya <bahkaya@student.42istanbul.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 16:29:25 by bahkaya           #+#    #+#             */
-/*   Updated: 2025/11/26 21:56:09 by bahkaya          ###   ########.fr       */
+/*   Updated: 2025/11/30 18:01:43 by bahkaya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_check_for_same_number(char const **av, int number, int ac)
 		exit(-1);
 	}
 }
+
 void	ft_error_check_n_argv(char const **av)
 {
 	int		i;
@@ -71,30 +72,10 @@ char **ft_n_av_converter(char const **av, int ac)
 	i = 0;
 	k = 1;
 	len = 0;
-	while(k < ac) // Burası sıkıntılı doğru değil parse düzgün yap aq!
-	{
-		len = ft_atoi(av[k]);
-		if (ft_atoi(av[k]) > 2147483647 || ft_atoi(av[k]) < -2147483648)
-		{
-			write(2, "Error\n", 6);
-			exit(-1);
-		}
-		ft_check_for_same_number(av, len, ac);
-		k++;
-	}
 	arr_digit = malloc(sizeof(char *) * ac);
 	if (!arr_digit)
-	{
-		write(2, "Error\n", 6);
-		ft_free(arr_digit); // kontrol et buna gerek yok olsa gerek
-		exit(-1);
-	}
+		ft_error_return_pointer(arr_digit);
 	len = 0;
-	// if (len != 1)
-	// {
-	// 	write(2, "Erro5\n", 6);
-	// 	exit(-1);
-	// }
 	k = 1;
 	while (k < ac)
 	{
@@ -103,7 +84,7 @@ char **ft_n_av_converter(char const **av, int ac)
 		i++;
 		ac--;
 	}
-	arr_digit[i + 1] = NULL;
+	arr_digit[i] = NULL;
 	return(arr_digit);
 }
 
@@ -119,11 +100,10 @@ t_stack *ft_n_stack_a(char const **av, int ac)
 	i = 0;
 	ft_error_check_n_argv(av);
 	arr_digit = ft_n_av_converter(av, ac);
+	ft_check_for_max(arr_digit);
 	i = 0;
-
 	while (i < ac - 1)
 	{
-
 		head = ft_stack_malloc_a(ft_atoi(arr_digit[i]), arr_digit);
 		if(!head)
 		{
@@ -136,6 +116,6 @@ t_stack *ft_n_stack_a(char const **av, int ac)
 		temp = head;
 		i++;
 	}
-	// ft_free(arr_digit); burada bir hata var ama ne?
+	ft_free(arr_digit);
 	return (head);
 }
